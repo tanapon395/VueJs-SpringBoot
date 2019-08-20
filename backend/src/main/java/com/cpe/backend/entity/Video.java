@@ -1,12 +1,15 @@
-package com.cpe.backend.model;
+package com.cpe.backend.entity;
 
 import lombok.*;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import java.util.Collection;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +24,7 @@ import javax.persistence.FetchType;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name="video")
+@Table(name="VIDEO")
 public class Video {
 
     @Id
@@ -30,26 +33,10 @@ public class Video {
     @Column(name = "VIDEO_ID", unique = true, nullable = true)
     private @NonNull Long id;
 
-    @Column(name="code")
-    private @NonNull String code;
     private @NonNull String title;
-    private @NonNull String url;
-    
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinColumn(name = "V_ID", insertable = true)
-    private User videoUser;
 
-   // @ManyToOne(fetch = FetchType.EAGER, targetEntity = Playlist.class)
-   // @JoinColumn(name = "playlist_ID")
-
-  // @Column(name="Playlist_ID")
-  // @JoinColumn(name="V_ID", referencedColumnName="VIDEO_ID", insertable = true)
-   // private long playlistId;
-
-// @ManyToOne(fetch = FetchType.EAGER, targetEntity = Playlist.class)
-// @JoinColumn(name = "listVideo", nullable=false)
-// @JsonBackReference
-// private Playlist playlistId;
+    @OneToMany(fetch = FetchType.EAGER)
+    private Collection<VideoRental> rent;
 
 }
