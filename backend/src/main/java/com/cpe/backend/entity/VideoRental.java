@@ -42,15 +42,15 @@ public class VideoRental {
     @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
     private Employee createdBy;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Video.class)
     @JoinColumn(name = "VIDEO_ID", insertable = true)
     private Video video;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name = "CUSTOMER_ID", insertable = true)
     private Customer rentCustomer;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = RentalType.class)
     @JoinColumn(name = "RENTAL_TYPE_ID", insertable = true)
     private RentalType type;
 }
