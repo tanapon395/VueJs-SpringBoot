@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 
 import javax.persistence.OneToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,10 +19,7 @@ import javax.persistence.Entity;
 
 @Data
 @Entity
-@Getter @Setter
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Table(name="CUSTOMER")
 public class Customer {
 	@Id

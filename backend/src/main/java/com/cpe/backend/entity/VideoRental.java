@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,10 +21,7 @@ import com.cpe.backend.entity.Employee;;
 
 @Data
 @Entity
-@Getter @Setter
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Table(name="VIDEO_RENTAL")
 public class VideoRental {
 
