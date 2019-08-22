@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="700" src="images/system.png">
+</p>
+
 # VueJs-SpringBoot
 System Analysis and Design 62/1
 
@@ -20,10 +24,14 @@ System Analysis and Design 62/1
 - JDBC URL ใส่ค่าเป็น jdbc:h2:mem:testdb
 
 # System Activity Diagram
-![Screenshot](images/System%20Activity%20Diagram.jpg)
+<p align="center">
+  <img width="600" src="images/System%20Activity%20Diagram.jpg">
+</p>
 
 # Class Diagram
-![Screenshot](images/Class%20Diagram.PNG)
+<p align="center">
+  <img width="800" src="images/Class%20Diagram.PNG">
+</p>
 
 
 
