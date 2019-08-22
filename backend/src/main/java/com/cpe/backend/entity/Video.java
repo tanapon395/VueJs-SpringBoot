@@ -36,7 +36,8 @@ public class Video {
     private @NonNull String title;
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy  = "video")
+    @OneToMany(fetch = FetchType.EAGER)
+    // mappedBy  = "video"
     private Collection<VideoRental> rent;
 
 }

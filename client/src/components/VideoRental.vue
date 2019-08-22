@@ -10,49 +10,74 @@
     <v-row justify="center">
       <v-col cols="4">
         <v-form v-model="valid" ref="form">
-          <v-switch v-model="customerCheck" class="ma-2" label="Ediatable"></v-switch>
-          <v-text-field
-            outlined
-            label="Customer ID"
-            v-model="videoRental.customerId"
-            :rules="[(v) => !!v || 'Item is required']"
-            required
-          ></v-text-field>
+          <v-row justify="center">
+            <v-col cols="10">
+              <v-text-field
+                outlined
+                label="Customer ID"
+                v-model="videoRental.customerId"
+                :rules="[(v) => !!v || 'Item is required']"
+                required
+              ></v-text-field>
+              <p v-if="customerCheck != ''">Customer Name : {{customerName}}</p>
+            </v-col>
+            <v-col cols="2">
+              <div class="my-2">
+                <v-btn @click="findCustomer" depressed large color="primary">Search</v-btn>
+              </div>
+            </v-col>
+          </v-row>
+
           <div v-if="customerCheck">
-            <v-select
-              label="Employee"
-              outlined
-              v-model="videoRental.employeeId"
-              :items="employees"
-              item-text="name"
-              item-value="id"
-              :rules="[(v) => !!v || 'Item is required']"
-              required
-            ></v-select>
-            <v-select
-              label="RentalType"
-              outlined
-              v-model="videoRental.rentalId"
-              :items="rentalTypes"
-              item-text="name"
-              item-value="id"
-              :rules="[(v) => !!v || 'Item is required']"
-              required
-            ></v-select>
-            <v-select
-              label="Video"
-              outlined
-              v-model="videoRental.videoId"
-              :items="videos"
-              item-text="title"
-              item-value="id"
-              :rules="[(v) => !!v || 'Item is required']"
-              required
-            ></v-select>
+            <v-row>
+              <v-col cols="10">
+                <v-select
+                  label="Employee"
+                  outlined
+                  v-model="videoRental.employeeId"
+                  :items="employees"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="10">
+                <v-select
+                  label="RentalType"
+                  outlined
+                  v-model="videoRental.rentalId"
+                  :items="rentalTypes"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="10">
+                <v-select
+                  label="Video"
+                  outlined
+                  v-model="videoRental.videoId"
+                  :items="videos"
+                  item-text="title"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-row justify="center">
+              <v-col cols="12">
+                <v-btn @click="saveVideoRental" :class="{ red: !valid, green: valid }">submit</v-btn>
+                <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+              </v-col>
+            </v-row>
             <br />
-            <p style="text-align:center">
-              <v-btn @click="saveVideoRental" :class="{ red: !valid, green: valid }">submit</v-btn>
-            </p>
           </div>
         </v-form>
       </v-col>
@@ -64,7 +89,7 @@
 import http from "../http-common";
 
 export default {
-  name : 'videoRental',
+  name: "videoRental",
   data() {
     return {
       videoRental: {
@@ -74,24 +99,14 @@ export default {
         videoId: ""
       },
       valid: false,
-      customerCheck: false
+      customerCheck: false,
+      customerName: ""
     };
   },
   methods: {
     /* eslint-disable no-console */
-    // ดึงข้อมูล Customer
-    // getCustomers() {
-    //   http
-    //     .get("/customer")
-    //     .then(response => {
-    //       this.customers = response.data;
-    //       console.log(response.data);
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
-    // },
-    // ดึงข้อมูล Employee
+
+    // ดึงข้อมูล Employee ใส่ combobox
     getEmployees() {
       http
         .get("/employee")
@@ -103,7 +118,7 @@ export default {
           console.log(e);
         });
     },
-    // ดึงข้อมูล Video
+    // ดึงข้อมูล Video ใส่ combobox
     getVideos() {
       http
         .get("/video")
@@ -115,7 +130,7 @@ export default {
           console.log(e);
         });
     },
-    // ดึงข้อมูล RentalType
+    // ดึงข้อมูล RentalType ใส่ combobox
     getRentalTypes() {
       http
         .get("/rentalType")
@@ -127,9 +142,26 @@ export default {
           console.log(e);
         });
     },
+    // function ค้นหาลูกค้าด้วย ID
+    findCustomer() {
+      http
+        .get("/customer/" + this.videoRental.customerId)
+        .then(response => {
+          console.log(response);
+          if (response.data != null) {
+            this.customerName = response.data.name;
+            this.customerCheck = response.status;
+          } else {
+            this.clear()
+          }          
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      this.submitted = true;
+    },
     // function เมื่อกดปุ่ม submit
     saveVideoRental() {
-      console.log(this.videoRental);
       http
         .post(
           "/videoRental/" +
@@ -144,14 +176,18 @@ export default {
         )
         .then(response => {
           console.log(response);
+          this.$router.push("/view");
         })
         .catch(e => {
           console.log(e);
         });
       this.submitted = true;
     },
+    clear() {
+      this.$refs.form.reset();
+      this.customerCheck = false;
+    },
     refreshList() {
-      this.getCustomers();
       this.getEmployees();
       this.getVideos();
       this.getRentalTypes();
@@ -159,7 +195,6 @@ export default {
     /* eslint-enable no-console */
   },
   mounted() {
-    // this.getCustomers();
     this.getEmployees();
     this.getVideos();
     this.getRentalTypes();

@@ -23,7 +23,7 @@ public class VideoController {
     }
 
     @GetMapping("/video")
-    public Collection<Video> Video() {
+    public Collection<Video> Videos() {
         return videoRepository.findAll().stream().collect(Collectors.toList());
     }
 

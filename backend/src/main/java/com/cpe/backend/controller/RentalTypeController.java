@@ -25,7 +25,7 @@ public class RentalTypeController {
     }
 
     @GetMapping("/rentalType")
-    public Collection<RentalType> RentalType() {
+    public Collection<RentalType> RentalTypes() {
         return rentalTypeRepository.findAll().stream().collect(Collectors.toList());
     }
 

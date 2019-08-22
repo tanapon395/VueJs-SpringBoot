@@ -26,7 +26,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee")
-    public Collection<Employee> Employee() {
+    public Collection<Employee> Employees() {
         return employeeRepository.findAll().stream().collect(Collectors.toList());
     }
 

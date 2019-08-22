@@ -6,8 +6,15 @@ import VideoRental from '../components/VideoRental';
 Vue.use(Router);
 
 export default new Router({
-    routes : [
-        { path: '/', component: VideoRental },
-        { path: '/view', component: ViewRental }
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [{
+            path: '/',
+            component: VideoRental
+        },
+        {
+            path: '/view',
+            component: ViewRental
+        }
     ]
 });

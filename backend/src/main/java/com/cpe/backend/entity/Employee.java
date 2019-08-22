@@ -35,6 +35,7 @@ public class Employee {
 
     private @NonNull String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy  = "createdBy")
+    @OneToMany(fetch = FetchType.EAGER)
+    // mappedBy  = "createdBy"
     private Collection<VideoRental> rent;
 }

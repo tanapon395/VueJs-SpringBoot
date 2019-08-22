@@ -35,13 +35,14 @@ public class VideoRentalController {
     @Autowired   private       EmployeeRepository    employeeRepository;
     @Autowired   private       RentalTypeRepository    rentalTypeRepository;
 
+    
     VideoRentalController(VideoRentalRepository videoRentalRepository) {
         this.videoRentalRepository = videoRentalRepository;
     }
 
 
     @GetMapping("/videoRental")
-    public Collection<VideoRental> VideoRental() {
+    public Collection<VideoRental> VideoRentals() {
         return videoRentalRepository.findAll().stream().collect(Collectors.toList());
     }
 
