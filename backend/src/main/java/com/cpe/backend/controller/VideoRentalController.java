@@ -26,7 +26,7 @@ import com.cpe.backend.repository.VideoRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class VideoRentalController {
     @Autowired   private final VideoRentalRepository    videoRentalRepository;

@@ -33,6 +33,6 @@ public class Customer {
 	private @NonNull Long id;
 	private @NonNull String name;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy  = "rentCustomer")
 	private Collection<VideoRental> rent;
 }
