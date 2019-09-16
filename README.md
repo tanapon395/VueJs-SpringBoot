@@ -14,7 +14,7 @@ System Analysis and Design 62/1
 # Fronend RUN
 ```
 - install Node & Yarn
-- yarn global add @vue/cli@3.1.5
+- yarn global add @vue/cli@3.9.3
 - cd cliend
 - npm install
 ```
