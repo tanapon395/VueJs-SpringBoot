@@ -17,6 +17,7 @@ System Analysis and Design 62/1
 - yarn global add @vue/cli@3.9.3
 - cd cliend
 - npm install
+- yarn serve
 ```
 
 # Database H2
